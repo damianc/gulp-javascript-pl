@@ -41,7 +41,7 @@ funkcja liczba(x) {
 }
 ```
 
-## Instrucja `switch`
+## Instrukcja `switch`
 
 ```
 przełącz (x) {
