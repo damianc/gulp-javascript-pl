@@ -1,0 +1,29 @@
+{
+  "name": "gulp-javascript-pl",
+  "version": "1.0.0",
+  "description": "Wtyczka pozwalająca pisać kod JavaScript po polsku.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jspl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damianc/gulp-javascript-pl.git"
+  },
+  "keywords": [
+    "gulp-plugin"
+  ],
+  "author": "Damian Czapiewski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damianc/gulp-javascript-pl/issues"
+  },
+  "homepage": "https://github.com/damianc/gulp-javascript-pl#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.0"
+  }
+}
