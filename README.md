@@ -22,3 +22,36 @@ zm fibbonaci = generator () {
 zm f = fibonacci();
 console.log(f.next().value);
 ```
+
+## Zmienne i stałe
+
+```
+zm a = 1,
+   b = 2;
+
+stała C = 3;
+```
+
+## Funkcje i instrukcje warunkowe
+
+```
+funkcja liczba(x) {
+	jeśli (x > 9) zwróć tak;
+	inaczej zwróć nie;
+}
+```
+
+## Instrucja `switch`
+
+```
+przełącz (x) {
+	gdy 1:
+	    console.log('Jeden');
+	    wyjdź;
+	gdy 2:
+	    console.log('Dwa');
+	    wyjdź;
+	domyślnie:
+	    console.log('Inna liczba')
+}
+```
