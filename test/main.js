@@ -87,33 +87,14 @@ describe('-- NESTED SNIPPETS', function () {
 		    	expected: 'zap'
 		    }
 		];
-
-		/*for (var i = 0, l = asserts.length; i < l; i++) {
-			var assert = asserts[i];
-			var desc = 'should turn `' + assert.passed + '` into `' + assert.expected + '`';
-
-			it(desc, function (done) {
-				tester(assert.passed, assert.expected, done);
-			});
-		}*/
-
-		it('should be kicking 1', function (done) {
-			tester(asserts[0].passed, asserts[0].expected, done);
-		});
-		it('should be kicking 2', function (done) {
-			tester(asserts[1].passed, asserts[1].expected, done);
-		});
-		it('should be kicking 3', function (done) {
-			tester(asserts[2].passed, asserts[2].expected, done);
-		});
-		it('should be kicking 4', function (done) {
-			tester(asserts[3].passed, asserts[3].expected, done);
-		});
-		it('should be kicking 5', function (done) {
-			tester(asserts[4].passed, asserts[4].expected, done);
-		});
-		it('should be kicking 6', function (done) {
-			tester(asserts[5].passed, asserts[5].expected, done);
+		
+		asserts.forEach(function (assert) {
+		    (function (a) {
+			    var desc = 'should turn ' + a.passed + ' into ' + a.expected;
+				it(desc, function (done) {
+				    tester(a.passed, a.expected, done);
+				});
+			})(assert);
 		});
     });
 });
