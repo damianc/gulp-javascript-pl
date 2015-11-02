@@ -13,7 +13,7 @@ zm fibbonaci = generator () {
     zm pre = 0,
        cur = 1;
 
-	podczas gdy (tak) {
+	podczas (tak) {
         pre = [cur, cur += pre][0];
         dostarcz cur;
     }
@@ -21,6 +21,20 @@ zm fibbonaci = generator () {
 
 zm f = fibonacci();
 console.log(f.next().value);
+```
+
+Powyższe zostanie przetłumaczone na postać taką jak poniżej.
+
+```
+var fibbonaci = function* () {
+	var pre = 0,
+	   cur = 1;
+
+	while (true) {
+		pre = [cur, cur += pre][0];
+		yield cur;
+	}
+}
 ```
 
 ## Zmienne i stałe
