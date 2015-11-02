@@ -2,6 +2,7 @@ var should = require('should'),
     fs = require('fs'),
     es = require('event-stream'),
     File = require('vinyl'),
+    gutil = require('gulp-util'),
     jspl = require('../index');
 
 var tester = function (_jspl, _jsjs, done) {
@@ -23,13 +24,19 @@ var tester = function (_jspl, _jsjs, done) {
 };
 
 after(function () {
-	console.log('\t TESTS GOT FINISHED ');
+	console.log('\t TESTS GOT FINISHED');
 });
 
 describe('-- NESTED SNIPPETS', function () {
-	/*
+	/**
 	 * Make sure vocab being a part of a word (instead of standalone statement) remains untouched.
 	 * For example, sno-w-ball should not be turned into sno-in-ball.
+	 *
+	 * Make sure latina letter will not be taken in place of Polish one.
+	 * For example, stala should not be turned into const since its Polish equivalent is stała.
+	 *
+	 * Make sure a statement will be matched no matter of case.
+	 * For example, Funkcja should be turned into function as well as funkcja or FunKcja.
 	 */
 	describe('Proper statement replacing', function () {
 	    it('should turn `nietoperz` into `nietoperz`', function (done) {
@@ -41,7 +48,7 @@ describe('-- NESTED SNIPPETS', function () {
 	    });
 
 	    it('should turn `stała E = 2.7183;` into `const E = 2.7183;`', function (done) {
-	    	tester('stała E = 2.7183;', 'const E = 2.7183;', done)
+	    	tester('stała E = 2.7183;', 'const E = 2.7183;', done);
 	    });
 
 	    it('should turn `stala E = 2.7183;` into `stala E = 2.7183;`', function (done) {
@@ -54,12 +61,80 @@ describe('-- NESTED SNIPPETS', function () {
 	});
 
 	describe('Proper translating JavaScript PL into JavaScript', function () {
-	    it('should turn `(tak || nie) && (prawda && fałsz)` into `(true || false) && (true || false)`', function (done) {
-            tester('(tak || nie)', '(true || false)', done);
-	    });
+		var asserts = [
+		    {
+		    	passed: '(tak || nie) && (prawda || fałsz)',
+		    	expected: '(true || false) && (true || false)'
+		    },
+		    {
+		    	passed: 'jeśli (tak) { jeżeli (prawda) {}}',
+		    	expected: 'if (true) { if (true) {}}'
+		    },
+		    {
+		    	passed: 'przez (zm i = 1; i <= 3; console.log(i++));',
+		    	expected: 'for (var i = 1; i <= 3; console.log(i++));'
+		    },
+		    {
+		    	passed: 'zm sum = funkcja (a, b) { zwróć a + b; };',
+		    	expected: 'var sum = function (a, b) { return a + b; };'
+		    },
+		    {
+		    	passed: 'generator snowball() { zm a = 1; dostarcz a++; }',
+		    	expected: 'function* snowball() { var a = 1; yield a++; }'
+		    },
+		    {
+		    	passed: 'lol',
+		    	expected: 'zap'
+		    }
+		];
 
-	    it('should turn `generator snowball() { zm a = 1; dostarcz a++; }` into `function* snowball() { var a = 1; yield a++; }`', function (done) {
-		    tester('generator snowball() { zm a = 1; dostarcz a++; }', 'function* snowball() { var a = 1; yield a++; }', done);
-	    });
+		/*for (var i = 0, l = asserts.length; i < l; i++) {
+			var assert = asserts[i];
+			var desc = 'should turn `' + assert.passed + '` into `' + assert.expected + '`';
+
+			it(desc, function (done) {
+				tester(assert.passed, assert.expected, done);
+			});
+		}*/
+
+		it('should be kicking 1', function (done) {
+			tester(asserts[0].passed, asserts[0].expected, done);
+		});
+		it('should be kicking 2', function (done) {
+			tester(asserts[1].passed, asserts[1].expected, done);
+		});
+		it('should be kicking 3', function (done) {
+			tester(asserts[2].passed, asserts[2].expected, done);
+		});
+		it('should be kicking 4', function (done) {
+			tester(asserts[3].passed, asserts[3].expected, done);
+		});
+		it('should be kicking 5', function (done) {
+			tester(asserts[4].passed, asserts[4].expected, done);
+		});
+		it('should be kicking 6', function (done) {
+			tester(asserts[5].passed, asserts[5].expected, done);
+		});
     });
 });
+
+/*
+To be being done.
+
+describe('-- SOURCE FILES', function () {
+	before(function (done) {
+		if (! fs.existsSync('test/produced')) {
+            gutil.log('JS files have not been produced and put in', gutil.colors.bold('/produced'), 'and there is nothing to compare expected results with.');
+            gutil.log('Use', gutil.colors.bold.black.bgYellow(' cd test && gulp jspl && cd .. '), 'to produce them.');
+            gutil.log('Later on you can throw them away with', gutil.colors.black.bgYellow(' gulp clean '));
+            gutil.log(gutil.colors.bold.white.bgRed(' ! '), gutil.colors.bold.red('THERE ARE TESTS THAT HAVE NOT BEEN RUN'));
+            return done('Error: no produced (translated) files exist in /produced.');
+	    }
+	});
+
+
+	it('should be 3', function (done) {
+		(1+2).should.be.equal(3);
+	});
+});
+*/

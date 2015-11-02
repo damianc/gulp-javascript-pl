@@ -13,7 +13,7 @@ extend = function (target) {
     return target;
 };
 
-/*
+/**
  * Basic JS statements.
  */
 extend(vocab, {
@@ -26,7 +26,7 @@ extend(vocab, {
     'fałsz': 'false'
 });
 
-/*
+/**
  * Function thing statements.
  */
 extend(vocab, {
@@ -36,7 +36,7 @@ extend(vocab, {
     'parametry': 'argumenty'
 });
 
-/*
+/**
  * Generator thing statements.
  */
 extend(vocab, {
@@ -44,7 +44,7 @@ extend(vocab, {
     'dostarcz': 'yield'
 });
 
-/*
+/**
  * Conditional thing statements.
  */
 extend(vocab, {
@@ -53,7 +53,7 @@ extend(vocab, {
     'inaczej': 'else'
 });
 
-/*
+/**
  * Loop thing statements.
  */
 extend(vocab, {
@@ -71,7 +71,7 @@ extend(vocab, {
     'kontynuuj': 'continue'
 });
 
-/*
+/**
  * Switching thing statements.
  */
 extend(vocab, {
@@ -80,7 +80,7 @@ extend(vocab, {
     'domyślnie': 'default'
 });
 
-/*
+/**
  * Exception thing statements.
  */
 extend(vocab, {
@@ -91,7 +91,7 @@ extend(vocab, {
     'finalnie': 'finally'
 });
 
-/*
+/**
  * OOP thing statements.
  */
 extend(vocab, {
@@ -106,7 +106,7 @@ extend(vocab, {
     'usuń': 'delete'
 });
 
-/*
+/**
  * Additional statements.
  */
 extend(vocab, {
