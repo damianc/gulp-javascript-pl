@@ -5,7 +5,15 @@ var through = require('through2'),
 const PLUGIN_NAME = 'gulp-javascript-pl';
 
 var jspl = function () {
-    var stream = through.obj(function (file, enc, cb) {
+    var stream,
+        fileContent,
+        vocabDict,
+        vocabList,
+        vocabRE,
+        js,
+        bufferedSource;
+
+    stream = through.obj(function (file, enc, cb) {
         if (file.isNull()) {
             return cb(null, file);
         }
@@ -16,14 +24,13 @@ var jspl = function () {
         }
 
         if (file.isBuffer()) {
-            var fileContent = file.contents.toString('utf8'),
-                vocabDict = vocab,
-                vocabList = Object.keys(vocabDict).join('|'),
-                vocabRE = new RegExp('\\b(' + vocabList + ')\\b', 'gi'),
-                js,
-                bufferedSource;
+            fileContent = file.contents.toString('utf8');
+            vocabDict = vocab;
+            vocabList = Object.keys(vocabDict).join('|');
+            vocabRE = new RegExp('\\b(' + vocabList + ')\\b', 'gi');
 
             js = fileContent.replace(vocabRE, function (stmt) {
+                var stmt = stmt.toLowerCase();
                 return vocabDict[stmt];
             });
 

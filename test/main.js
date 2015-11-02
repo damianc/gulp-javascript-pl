@@ -5,12 +5,15 @@ var should = require('should'),
     jspl = require('../index');
 
 var tester = function (_jspl, _jsjs, done) {
-	var fakeFile = new File({
+	var fakeFile,
+	    JP;
+
+	fakeFile = new File({
         contents: new Buffer(_jspl),
-        path: 'file.jspl'
+        path: '-path-of-fake-file.jspl'
     });
 
-    var JP = jspl();
+    JP = jspl();
     JP.write(fakeFile);
     JP.once('data', function (file) {
         var c = file.contents.toString('utf8');
@@ -50,11 +53,13 @@ describe('-- NESTED SNIPPETS', function () {
 	    });
 	});
 
-	it('should turn `(tak || nie) && (prawda && fałsz)` into `(true || false) && (true || false)`', function (done) {
-        tester('(tak || nie)', '(true || false)', done);
-	});
+	describe('Proper translating JavaScript PL into JavaScript', function () {
+	    it('should turn `(tak || nie) && (prawda && fałsz)` into `(true || false) && (true || false)`', function (done) {
+            tester('(tak || nie)', '(true || false)', done);
+	    });
 
-	it('should turn `generator snowball() { zm a = 1; dostarcz a++; }` into `function* snowball() { var a = 1; yield a++; }`', function (done) {
-		tester('generator snowball() { zm a = 1; dostarcz a++; }', 'function* snowball() { var a = 1; yield a++; }', done);
-	});
+	    it('should turn `generator snowball() { zm a = 1; dostarcz a++; }` into `function* snowball() { var a = 1; yield a++; }`', function (done) {
+		    tester('generator snowball() { zm a = 1; dostarcz a++; }', 'function* snowball() { var a = 1; yield a++; }', done);
+	    });
+    });
 });
