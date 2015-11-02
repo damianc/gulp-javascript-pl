@@ -19,7 +19,7 @@ var jspl = function () {
             var fileContent = file.contents.toString('utf8'),
                 vocabDict = vocab,
                 vocabList = Object.keys(vocabDict).join('|'),
-                vocabRE = new RegExp(vocabList, 'g'),
+                vocabRE = new RegExp('\\b(' + vocabList + ')\\b', 'gi'),
                 js,
                 bufferedSource;
 

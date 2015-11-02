@@ -12,9 +12,11 @@ vocab = {
     'dopóki': 'while',
     'tak': 'true',
     'nie': 'false',
+    'prawda': 'true',
+    'fałsz': 'false',
     'wyjdź': 'break',
     'jedź': 'continue',
-    'kontynuuj': 'continue'
+    'kontynuuj': 'continue',
     'argumenty': 'arguments',
     'parametry': 'arguments',
     'przełącz': 'switch',
@@ -32,7 +34,7 @@ vocab = {
     'rób': 'do',
     'zrób': 'do',
     'w': 'in',
-    'with': 'z',
+    'z': 'with',
     'nowy': 'new',
     'nowa': 'new',
     'nowe': 'new'
