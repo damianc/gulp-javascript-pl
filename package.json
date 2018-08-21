@@ -4,7 +4,7 @@
   "description": "Wtyczka pozwalająca pisać kod JavaScript po polsku.",
   "main": "index.js",
   "scripts": {
-    "test": "jspl"
+    "test": "node ./node_modules/mocha/bin/mocha test/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "event-stream": "^3.3.2",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
+    "mocha": "^5.2.0",
     "should": "^7.1.1",
     "vinyl": "^1.1.0"
   },
