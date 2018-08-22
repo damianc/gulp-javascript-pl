@@ -18,8 +18,16 @@ var tester = function (_jspl, _jsjs, done) {
     JP.write(fakeFile);
     JP.once('data', function (file) {
         var c = file.contents.toString('utf8');
-        try {c.should.be.equal(_jsjs); done(); }
-        catch (_) {}
+        try {
+        	c.should.be.equal(_jsjs);
+        	done();
+        } catch (exc) {
+        	console.log(
+        		'\n EXPECTED \t\t', exc.expected,
+        		'\n ACTUAL \t\t', exc.actual,
+        		'\n\t \\/ \n'
+        	);
+        }
     });
 };
 
