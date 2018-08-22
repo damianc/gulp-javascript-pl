@@ -5,21 +5,22 @@ var File = require('vinyl');
 var gutil = require('gulp-util');
 var jspl = require('../index');
 
-var tester = function (_jspl, _jsjs, done) {
+var tester = function (jsplString, pureJsString, done) {
 	var fakeFile;
-	var JP;
+	var jsplPlugin;
 
 	fakeFile = new File({
-        contents: new Buffer(_jspl),
+        contents: new Buffer(jsplString),
         path: '-path-of-fake-file.jspl'
     });
 
-    JP = jspl();
-    JP.write(fakeFile);
-    JP.once('data', function (file) {
-        var c = file.contents.toString('utf8');
+    jsplPlugin = jspl();
+    jsplPlugin.write(fakeFile);
+    jsplPlugin.once('data', function (file) {
+        var fileContent = file.contents.toString('utf8');
+
         try {
-        	c.should.be.equal(_jsjs);
+        	fileContent.should.be.equal(pureJsString);
         	done();
         } catch (exc) {
         	console.log(
@@ -69,7 +70,7 @@ describe('-- NESTED SNIPPETS', function () {
 	});
 
 	describe('Proper translating JavaScript PL into JavaScript', function () {
-		var asserts = [
+		var assertions = [
 		    {
 		    	passed: '(tak || nie) && (prawda || fałsz)',
 		    	expected: '(true || false) && (true || false)'
@@ -92,19 +93,19 @@ describe('-- NESTED SNIPPETS', function () {
 		    }
 		];
 		
-		asserts.forEach(function (assert) {
-		    (function (a) {
-			    var desc = 'should turn ' + a.passed + ' into ' + a.expected;
-				it(desc, function (done) {
-				    tester(a.passed, a.expected, done);
+		assertions.forEach(function (assertion) {
+		    (function (assertionItem) {
+			    var assertionDescription = 'should turn ' + assertionItem.passed + ' into ' + assertionItem.expected;
+				it(assertionDescription, function (done) {
+				    tester(assertionItem.passed, assertionItem.expected, done);
 				});
-			})(assert);
+			})(assertion);
 		});
     });
 });
 
 /*
-To be being done.
+To do.
 
 describe('-- SOURCE FILES', function () {
 	before(function (done) {
@@ -117,6 +118,7 @@ describe('-- SOURCE FILES', function () {
 	    }
 	});
 
+	after();
 
 	it('should be 3', function (done) {
 		(1+2).should.be.equal(3);
