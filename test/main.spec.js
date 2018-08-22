@@ -1,13 +1,13 @@
-var should = require('should'),
-    fs = require('fs'),
-    es = require('event-stream'),
-    File = require('vinyl'),
-    gutil = require('gulp-util'),
-    jspl = require('../index');
+var should = require('should');
+var fs = require('fs');
+var es = require('event-stream');
+var File = require('vinyl');
+var gutil = require('gulp-util');
+var jspl = require('../index');
 
 var tester = function (_jspl, _jsjs, done) {
-	var fakeFile,
-	    JP;
+	var fakeFile;
+	var JP;
 
 	fakeFile = new File({
         contents: new Buffer(_jspl),
