@@ -1,6 +1,8 @@
 var vocab = {};
 
-// Basic JS statements.
+/*
+ Basic JS statements.
+ */
 Object.assign(vocab, {
     'zm': 'var',
     'zmienna': 'var',
