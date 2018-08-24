@@ -1,22 +1,7 @@
-var vocab = {},
-    extend;
+var vocab = {};
 
-extend = function (target) {
-    var sources = [].slice.call(arguments, 1);
-
-    sources.forEach(function (source) {
-        for (var prop in source) {
-            target[prop] = source[prop];
-        }
-    });
-
-    return target;
-};
-
-/**
- * Basic JS statements.
- */
-extend(vocab, {
+// Basic JS statements.
+Object.assign(vocab, {
     'zm': 'var',
     'zmienna': 'var',
     'stała': 'const',
@@ -29,7 +14,7 @@ extend(vocab, {
 /**
  * Function thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'funkcja': 'function',
     'zwróć': 'return',
     'argumenty': 'arguments',
@@ -39,7 +24,7 @@ extend(vocab, {
 /**
  * Generator thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'generator': 'function*',
     'dostarcz': 'yield'
 });
@@ -47,7 +32,7 @@ extend(vocab, {
 /**
  * Conditional thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'jeśli': 'if',
     'jeżeli': 'if',
     'inaczej': 'else'
@@ -56,7 +41,7 @@ extend(vocab, {
 /**
  * Loop thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'przez': 'for',
     'dla': 'for',
     'w': 'in',
@@ -74,7 +59,7 @@ extend(vocab, {
 /**
  * Switching thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'przełącz': 'switch',
     'gdy': 'case',
     'domyślnie': 'default'
@@ -83,7 +68,7 @@ extend(vocab, {
 /**
  * Exception thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'spróbuj': 'try',
     'złap': 'catch',
     'obsłuż': 'catch',
@@ -94,7 +79,7 @@ extend(vocab, {
 /**
  * OOP thing statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'klasa': 'class',
     'interfejs': 'interface',
     'rozszerza': 'extends',
@@ -109,7 +94,7 @@ extend(vocab, {
 /**
  * Additional statements.
  */
-extend(vocab, {
+Object.assign(vocab, {
     'z': 'with'
 });
 
