@@ -6,18 +6,15 @@ var gutil = require('gulp-util');
 var jspl = require('../index');
 
 var tester = function (jsplString, pureJsString, done) {
-	var fakeFile;
-	var jsplPlugin;
+	var fakeFile = new File({
+        contents: new Buffer(jsplString),
+        path: '-path-of-fake-file.jspl'
+    });
 
-	fakeFile = new File({
-		contents: new Buffer(jsplString),
-		path: '-path-of-fake-file.jspl'
-	});
-
-	jsplPlugin = jspl();
-	jsplPlugin.write(fakeFile);
-	jsplPlugin.once('data', function (file) {
-		var fileContent = file.contents.toString('utf8');
+    var jsplPlugin = jspl();
+    jsplPlugin.write(fakeFile);
+    jsplPlugin.once('data', function (file) {
+        var fileContent = file.contents.toString('utf8');
 
 		try {
 			fileContent.should.be.equal(pureJsString);
