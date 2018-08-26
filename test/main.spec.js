@@ -6,7 +6,7 @@ var gutil = require('gulp-util');
 var jspl = require('../index');
 
 var tester = function (jsplString, pureJsString, done) {
-	var fakeFile = new File({
+    var fakeFile = new File({
         contents: new Buffer(jsplString),
         path: '-path-of-fake-file.jspl'
     });
