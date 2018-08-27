@@ -1,17 +1,17 @@
-var through = require('through2'),
-    gutil = require('gulp-util'),
-    vocab = require('./vocab');
+var through = require('through2');
+var gutil = require('gulp-util');
+var vocab = require('./vocab');
 
 const PLUGIN_NAME = 'gulp-javascript-pl';
 
 var jspl = function () {
-    var stream,
-        fileContent,
-        vocabDict,
-        vocabList,
-        vocabRE,
-        js,
-        bufferedSource;
+    var stream;
+    var fileContent;
+    var vocabDict;
+    var vocabList;
+    var vocabRE;
+    var js;
+    var bufferedSource;
 
     stream = through.obj(function (file, enc, cb) {
         if (file.isNull()) {
