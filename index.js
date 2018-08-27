@@ -5,15 +5,7 @@ var vocab = require('./vocab');
 const PLUGIN_NAME = 'gulp-javascript-pl';
 
 var jspl = function () {
-    var stream;
-    var fileContent;
-    var vocabDict;
-    var vocabList;
-    var vocabRE;
-    var js;
-    var bufferedSource;
-
-    stream = through.obj(function (file, enc, cb) {
+    var stream = through.obj(function (file, enc, cb) {
         if (file.isNull()) {
             return cb(null, file);
         }
@@ -24,18 +16,15 @@ var jspl = function () {
         }
 
         if (file.isBuffer()) {
-            fileContent = file.contents.toString('utf8');
-            vocabDict = vocab;
-            vocabList = Object.keys(vocabDict).join('|');
-            vocabRE = new RegExp('(?<!\\w)(' + vocabList + ')(?!\\w)', 'gi');
+            let fileContent = file.contents.toString('utf8');
+            let vocabList = Object.keys(vocab).join('|');
+            let vocabRE = new RegExp('(?<!\\w)(' + vocabList + ')(?!\\w)', 'gi');
 
-            js = fileContent.replace(vocabRE, function (stmt) {
-                var stmt = stmt.toLowerCase();
-                return vocabDict[stmt];
+            let js = fileContent.replace(vocabRE, function (stmt) {
+                return vocab[stmt.toLowerCase()];
             });
 
-            bufferedSource = new Buffer(js);
-            file.contents = bufferedSource;
+            file.contents = new Buffer(js);
             file.path = gutil.replaceExtension(file.path, '.js');
         }
 
