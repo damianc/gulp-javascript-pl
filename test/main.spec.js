@@ -16,16 +16,8 @@ var tester = function (jsplString, pureJsString, done) {
     jsplPlugin.once('data', function (file) {
         var fileContent = file.contents.toString('utf8');
 
-		try {
-			fileContent.should.be.equal(pureJsString);
-			done();
-		} catch (exc) {
-			console.log(
-				'\n EXPECTED \t\t', exc.expected,
-				'\n ACTUAL \t\t', exc.actual,
-				'\n\t \\/ \n'
-			);
-		}
+		fileContent.should.be.equal(pureJsString);
+		done();
 	});
 };
 
