@@ -18,7 +18,7 @@ var jspl = function () {
         if (file.isBuffer()) {
             let fileContent = file.contents.toString('utf8');
             let vocabList = Object.keys(vocab).join('|');
-            let vocabRE = new RegExp('(?<!\\w)(' + vocabList + ')(?!\\w)', 'gi');
+            let vocabRE = new RegExp('(?<!\\w)(' + vocabList + ')(?!\\w)(?=(?:[^"\\\\]*(?:\\\\.|"(?:[^"\\\\]*\\.)*[^"\\\\]*"))*[^"]*$)', 'gi');
 
             let js = fileContent.replace(vocabRE, function (stmt) {
                 return vocab[stmt.toLowerCase()];

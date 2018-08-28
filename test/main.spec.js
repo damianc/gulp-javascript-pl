@@ -79,6 +79,10 @@ describe('-- NESTED SNIPPETS', function () {
 			{
 				passed: 'generator snowball() { zm a = 1; dostarcz a++; }',
 				expected: 'function* snowball() { var a = 1; yield a++; }'
+			},
+			{
+				passed: 'funkcja func() { zwróć "funkcja \"func\""; }',
+				expected: 'function func() { return "funkcja \"func\""; }'
 			}
 		];
 		
