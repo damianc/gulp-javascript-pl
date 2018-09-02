@@ -1,12 +1,12 @@
-var gulp = require('gulp'),
-    clean = require('gulp-clean'),
-    jspl = require('../index');
+var gulp = require('gulp');
+var clean = require('gulp-clean');
+var jspl = require('../index');
 
 /**
  * Clean generated JS files.
  */
 gulp.task('clean', function () {
-	gulp.src('produced', {read: false})
+	return gulp.src('produced', {read: false})
 	    .pipe(clean({force: true}));
 });
 
@@ -14,7 +14,7 @@ gulp.task('clean', function () {
  * Compile .jspl files to JS.
  */
 gulp.task('jspl', function () {
-	gulp.src('jspl/*.jspl')
+	return gulp.src('jspl/*.jspl')
 	    .pipe(jspl())
 	    .pipe(gulp.dest('produced'));
 });
