@@ -6,7 +6,7 @@ var jspl = require('../index');
  * Clean generated JS files.
  */
 gulp.task('clean', function () {
-	return gulp.src('produced', {read: false})
+	return gulp.src('produced-js', {read: false})
 	    .pipe(clean({force: true}));
 });
 
@@ -14,7 +14,7 @@ gulp.task('clean', function () {
  * Compile .jspl files to JS.
  */
 gulp.task('jspl', function () {
-	return gulp.src('jspl/*.jspl')
+	return gulp.src('given-jspl/*.jspl')
 	    .pipe(jspl())
-	    .pipe(gulp.dest('produced'));
+	    .pipe(gulp.dest('produced-js'));
 });

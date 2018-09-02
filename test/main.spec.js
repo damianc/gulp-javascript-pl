@@ -111,8 +111,11 @@ describe('-- SOURCE FILES', function () {
 		child.on('close', () => done());
 	});
 
-	it('should be 3', function () {
-		(1+2).should.be.equal(3);
+	it('should transpile jspl to js', function () {
+		var expectedJs = fs.readFileSync('test/expected-js/vars.js', 'utf8').trim();
+		var producedJs = fs.readFileSync('test/produced-js/vars.js', 'utf8').trim();
+
+		producedJs.should.be.equal(expectedJs);
 	});
 });
 
