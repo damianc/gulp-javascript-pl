@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
-var jspl = require('../index');
+var jspl = require('../src/index');
 
 /**
  * Clean generated JS files.

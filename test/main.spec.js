@@ -3,7 +3,7 @@ var fs = require('fs');
 var es = require('event-stream');
 var File = require('vinyl');
 var gutil = require('gulp-util');
-var jspl = require('../index');
+var jspl = require('../src/index');
 var {spawn} = require('child_process');
 
 var tester = function (jsplString, pureJsString, done) {
