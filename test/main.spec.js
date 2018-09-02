@@ -4,6 +4,7 @@ var es = require('event-stream');
 var File = require('vinyl');
 var gutil = require('gulp-util');
 var jspl = require('../index');
+var {spawn} = require('child_process');
 
 var tester = function (jsplString, pureJsString, done) {
     var fakeFile = new File({
@@ -97,24 +98,21 @@ describe('-- NESTED SNIPPETS', function () {
 	});
 });
 
-/*
-To do.
+
 
 describe('-- SOURCE FILES', function () {
 	before(function (done) {
-		if (! fs.existsSync('test/produced')) {
-			gutil.log('JS files have not been produced and put in', gutil.colors.bold('/produced'), 'and there is nothing to compare expected results with.');
-			gutil.log('Use', gutil.colors.bold.black.bgYellow(' cd test && gulp jspl && cd .. '), 'to produce them.');
-			gutil.log('Later on you can throw them away with', gutil.colors.black.bgYellow(' gulp clean '));
-			gutil.log(gutil.colors.bold.white.bgRed(' ! '), gutil.colors.bold.red('THERE ARE TESTS THAT HAVE NOT BEEN RUN'));
-			return done('Error: no produced (translated) files exist in /produced.');
-		}
+		var child = spawn('gulp', ['jspl'], { stdio: 'inherit', shell: true , cwd: 'test/'});
+		child.on('close', () => done());
 	});
 
-	after();
+	after(function (done) {
+		var child = spawn('gulp', ['clean'], { stdio: 'inherit', shell: true , cwd: 'test/'});
+		child.on('close', () => done());
+	});
 
-	it('should be 3', function (done) {
+	it('should be 3', function () {
 		(1+2).should.be.equal(3);
 	});
 });
-*/
+
