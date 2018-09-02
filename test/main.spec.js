@@ -6,6 +6,10 @@ var gutil = require('gulp-util');
 var jspl = require('../index');
 var {spawn} = require('child_process');
 
+var {spawn} = require('child_process'); // Spawn NPM asynchronously
+// var child = spawn('gulp', ['jspl'], { stdio: 'inherit', shell: true , cwd: 'test/'});
+// child.on('close', () => console.log('closed'));
+
 var tester = function (jsplString, pureJsString, done) {
     var fakeFile = new File({
         contents: new Buffer(jsplString),
