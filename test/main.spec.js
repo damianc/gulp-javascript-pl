@@ -109,13 +109,19 @@ describe('# INTERNAL CODE', function () {
 });
 
 describe('# EXTERNAL CODE', function () {
+	var spawnCommonOpts = {
+		stdio: 'inherit',
+		shell: true,
+		cwd: 'test/'
+	};
+
 	before(function (done) {
-		var child = spawn('gulp', ['jspl'], { stdio: 'inherit', shell: true , cwd: 'test/'});
+		var child = spawn('gulp', ['jspl'], spawnCommonOpts);
 		child.on('close', () => done());
 	});
 
 	after(function (done) {
-		var child = spawn('gulp', ['clean'], { stdio: 'inherit', shell: true , cwd: 'test/'});
+		var child = spawn('gulp', ['clean'], spawnCommonOpts);
 		child.on('close', () => done());
 	});
 
