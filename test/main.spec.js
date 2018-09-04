@@ -131,8 +131,12 @@ describe('# EXTERNAL CODE', function () {
 			producedFileName: 'test/produced-js/vars.js',
 		},
 		{
-			expectedFileName: 'test/expected-js/gen.js',
-			producedFileName: 'test/produced-js/gen.js',
+			expectedFileName: 'test/expected-js/func.js',
+			producedFileName: 'test/produced-js/func.js',
+		},
+		{
+			expectedFileName: 'test/expected-js/conds.js',
+			producedFileName: 'test/produced-js/conds.js',
 		}
 	];
 

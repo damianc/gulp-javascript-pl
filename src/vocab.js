@@ -6,6 +6,7 @@ var vocab = {};
 Object.assign(vocab, {
     'zm': 'var',
     'zmienna': 'var',
+    'zmienna_blokowa': 'let',
     'stała': 'const',
     'tak': 'true',
     'nie': 'false',

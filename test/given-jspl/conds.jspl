@@ -1,0 +1,11 @@
+jeśli (a > b) {
+	// ok
+} inaczej {
+	// not ok
+}
+
+przełącz (x) {
+	gdy 1: 'ok, 1'; wyjdź;
+	gdy 2: 'ok, 2'; wyjdź;
+	domyślnie: 'neither 1 nor 2';
+}

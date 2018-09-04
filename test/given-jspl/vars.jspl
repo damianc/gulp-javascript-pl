@@ -1,6 +1,3 @@
 zm a = 1;
-zm b = 2;
-
-zm suma = funkcja (a, b) {
-	zwróć a + b;
-};
+zmienna_blokowa b = 2;
+stała c = 3;

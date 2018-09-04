@@ -1,3 +1,7 @@
+funkcja sum(a, b) {
+	zwróć a + b;
+}
+
 generator oneToThree() {
 	dostarcz* [1, 2, 3];
 }
