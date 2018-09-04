@@ -51,20 +51,16 @@ describe('# INTERNAL CODE', function () {
 			{
 				given: 'nietoperz',
 				expected: 'nietoperz'
-			},
-			{
+			}, {
 				given: 'nie-toper(z)',
 				expected: 'false-toper(with)'
-			},
-			{
+			}, {
 				given: 'stała E = 2.7183;',
 				expected: 'const E = 2.7183;'
-			},
-			{
+			}, {
 				given: 'stala E = 2.7183;',
 				expected: 'stala E = 2.7183;'
-			},
-			{
+			}, {
 				given: 'ZM f = Funkcja () {};',
 				expected: 'var f = function () {};'
 			}
@@ -85,24 +81,19 @@ describe('# INTERNAL CODE', function () {
 			{
 				given: '(tak || nie) && (prawda || fałsz)',
 				expected: '(true || false) && (true || false)'
-			},
-			{
+			}, {
 				given: 'jeśli (tak) { jeżeli (prawda) {}}',
 				expected: 'if (true) { if (true) {}}'
-			},
-			{
+			}, {
 				given: 'przez (zm i = 1; i <= 3; console.log(i++));',
 				expected: 'for (var i = 1; i <= 3; console.log(i++));'
-			},
-			{
+			}, {
 				given: 'zm sum = funkcja (a, b) { zwróć a + b; };',
 				expected: 'var sum = function (a, b) { return a + b; };'
-			},
-			{
+			}, {
 				given: 'generator snowball() { zm a = 1; dostarcz a++; }',
 				expected: 'function* snowball() { var a = 1; yield a++; }'
-			},
-			{
+			}, {
 				given: 'funkcja func() { zwróć "funkcja \"func\""; }',
 				expected: 'function func() { return "funkcja \"func\""; }'
 			}
