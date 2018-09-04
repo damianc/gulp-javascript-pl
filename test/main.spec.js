@@ -7,7 +7,7 @@ var jspl = require('../src/index');
 var {spawn} = require('child_process');
 
 // Function to test an embedded code.
-var internalTester = function (jsplString, pureJsString, done) {
+function internalTester(jsplString, pureJsString, done) {
     var fakeFile = new File({
         contents: new Buffer(jsplString),
         path: '-path-of-fake-file.jspl'
@@ -16,7 +16,7 @@ var internalTester = function (jsplString, pureJsString, done) {
     var jsplPlugin = jspl();
     jsplPlugin.write(fakeFile);
     jsplPlugin.once('data', function (file) {
-        var fileContent = file.contents.toString('utf8');
+		var fileContent = file.contents.toString('utf8');
 
 		fileContent.should.be.equal(pureJsString);
 		done();
@@ -68,7 +68,7 @@ describe('# INTERNAL CODE', function () {
 
 		assertions.forEach(function (assertion) {
 			(function (assertionItem) {
-				var assertionDescription = 'should turn ' + assertionItem.given + ' into ' + assertionItem.expected;
+				var assertionDescription = `should turn ${assertionItem.given}  into ${assertionItem.expected}`;
 				it(assertionDescription, function (done) {
 					internalTester(assertionItem.given, assertionItem.expected, done);
 				});
@@ -101,7 +101,7 @@ describe('# INTERNAL CODE', function () {
 		
 		assertions.forEach(function (assertion) {
 			(function (assertionItem) {
-				var assertionDescription = 'should turn ' + assertionItem.given + ' into ' + assertionItem.expected;
+				var assertionDescription = `should turn ${assertionItem.given} into ${assertionItem.expected}`;
 				it(assertionDescription, function (done) {
 					internalTester(assertionItem.given, assertionItem.expected, done);
 				});
