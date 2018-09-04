@@ -49,32 +49,32 @@ describe('# INTERNAL CODE', function () {
 	describe('Proper statement replacing', function () {
 		var assertions = [
 			{
-				passed: 'nietoperz',
+				given: 'nietoperz',
 				expected: 'nietoperz'
 			},
 			{
-				passed: 'nie-toper(z)',
+				given: 'nie-toper(z)',
 				expected: 'false-toper(with)'
 			},
 			{
-				passed: 'stała E = 2.7183;',
+				given: 'stała E = 2.7183;',
 				expected: 'const E = 2.7183;'
 			},
 			{
-				passed: 'stala E = 2.7183;',
+				given: 'stala E = 2.7183;',
 				expected: 'stala E = 2.7183;'
 			},
 			{
-				passed: 'ZM f = Funkcja () {};',
+				given: 'ZM f = Funkcja () {};',
 				expected: 'var f = function () {};'
 			}
 		];
 
 		assertions.forEach(function (assertion) {
 			(function (assertionItem) {
-				var assertionDescription = 'should turn ' + assertionItem.passed + ' into ' + assertionItem.expected;
+				var assertionDescription = 'should turn ' + assertionItem.given + ' into ' + assertionItem.expected;
 				it(assertionDescription, function (done) {
-					internalTester(assertionItem.passed, assertionItem.expected, done);
+					internalTester(assertionItem.given, assertionItem.expected, done);
 				});
 			})(assertion);
 		});
@@ -83,36 +83,36 @@ describe('# INTERNAL CODE', function () {
 	describe('Proper translating JavaScript PL into JavaScript', function () {
 		var assertions = [
 			{
-				passed: '(tak || nie) && (prawda || fałsz)',
+				given: '(tak || nie) && (prawda || fałsz)',
 				expected: '(true || false) && (true || false)'
 			},
 			{
-				passed: 'jeśli (tak) { jeżeli (prawda) {}}',
+				given: 'jeśli (tak) { jeżeli (prawda) {}}',
 				expected: 'if (true) { if (true) {}}'
 			},
 			{
-				passed: 'przez (zm i = 1; i <= 3; console.log(i++));',
+				given: 'przez (zm i = 1; i <= 3; console.log(i++));',
 				expected: 'for (var i = 1; i <= 3; console.log(i++));'
 			},
 			{
-				passed: 'zm sum = funkcja (a, b) { zwróć a + b; };',
+				given: 'zm sum = funkcja (a, b) { zwróć a + b; };',
 				expected: 'var sum = function (a, b) { return a + b; };'
 			},
 			{
-				passed: 'generator snowball() { zm a = 1; dostarcz a++; }',
+				given: 'generator snowball() { zm a = 1; dostarcz a++; }',
 				expected: 'function* snowball() { var a = 1; yield a++; }'
 			},
 			{
-				passed: 'funkcja func() { zwróć "funkcja \"func\""; }',
+				given: 'funkcja func() { zwróć "funkcja \"func\""; }',
 				expected: 'function func() { return "funkcja \"func\""; }'
 			}
 		];
 		
 		assertions.forEach(function (assertion) {
 			(function (assertionItem) {
-				var assertionDescription = 'should turn ' + assertionItem.passed + ' into ' + assertionItem.expected;
+				var assertionDescription = 'should turn ' + assertionItem.given + ' into ' + assertionItem.expected;
 				it(assertionDescription, function (done) {
-					internalTester(assertionItem.passed, assertionItem.expected, done);
+					internalTester(assertionItem.given, assertionItem.expected, done);
 				});
 			})(assertion);
 		});
