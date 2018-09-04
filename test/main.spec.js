@@ -5,7 +5,6 @@ var File = require('vinyl');
 var gutil = require('gulp-util');
 var jspl = require('../src/index');
 var {spawn} = require('child_process');
-var path = require('path');
 
 // Function to test an embedded code.
 var internalTester = function (jsplString, pureJsString, done) {
@@ -125,28 +124,14 @@ describe('# EXTERNAL CODE', function () {
 		child.on('close', () => done());
 	});
 
-	var assertions = [
-		{
-			expectedFileName: 'test/expected-js/vars.js',
-			producedFileName: 'test/produced-js/vars.js',
-		},
-		{
-			expectedFileName: 'test/expected-js/func.js',
-			producedFileName: 'test/produced-js/func.js',
-		},
-		{
-			expectedFileName: 'test/expected-js/conds.js',
-			producedFileName: 'test/produced-js/conds.js',
-		}
-	];
-
-	assertions.forEach(function (assertion) {
-		(function (assertionItem) {
-			var assertionDescription = 'should transpile ' + path.basename(assertionItem.expectedFileName) + ' file';
+	var externalFiles = fs.readdirSync('test/expected-js');
+	externalFiles.forEach(function (externalFile) {
+		(function (file) {
+			var assertionDescription = `should transpile ${file} file`;
 			it(assertionDescription, function (done) {
-				externalTester(assertionItem.expectedFileName, assertionItem.producedFileName, done);
+				externalTester(`test/expected-js/${file}`, `test/produced-js/${file}`, done);
 			});
-		})(assertion);
+		})(externalFile);
 	});
 });
 
