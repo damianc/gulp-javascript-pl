@@ -47,24 +47,36 @@ after(function () {
 
 describe('# INTERNAL CODE', function () {
 	describe('Proper statement replacing', function () {
-		it('should turn `nietoperz` into `nietoperz`', function (done) {
-			internalTester('nietoperz', 'nietoperz', done);
-		});
+		var assertions = [
+			{
+				passed: 'nietoperz',
+				expected: 'nietoperz'
+			},
+			{
+				passed: 'nie-toper(z)',
+				expected: 'false-toper(with)'
+			},
+			{
+				passed: 'stała E = 2.7183;',
+				expected: 'const E = 2.7183;'
+			},
+			{
+				passed: 'stala E = 2.7183;',
+				expected: 'stala E = 2.7183;'
+			},
+			{
+				passed: 'ZM f = Funkcja () {};',
+				expected: 'var f = function () {};'
+			}
+		];
 
-		it('should turn `nie-toper(z)` into `false-toper(with)`', function (done) {
-			internalTester('nie-toper(z)', 'false-toper(with)', done);
-		});
-
-		it('should turn `stała E = 2.7183;` into `const E = 2.7183;`', function (done) {
-			internalTester('stała E = 2.7183;', 'const E = 2.7183;', done);
-		});
-
-		it('should turn `stala E = 2.7183;` into `stala E = 2.7183;`', function (done) {
-			internalTester('stala E = 2.7183;', 'stala E = 2.7183;', done);
-		});
-
-		it('should turn `ZM f = Funkcja () {};` into `var f = function () {};`', function (done) {
-			internalTester('ZM f = Funkcja () {};', 'var f = function () {};', done);
+		assertions.forEach(function (assertion) {
+			(function (assertionItem) {
+				var assertionDescription = 'should turn ' + assertionItem.passed + ' into ' + assertionItem.expected;
+				it(assertionDescription, function (done) {
+					internalTester(assertionItem.passed, assertionItem.expected, done);
+				});
+			})(assertion);
 		});
 	});
 
