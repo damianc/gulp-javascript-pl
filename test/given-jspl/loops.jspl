@@ -1,0 +1,13 @@
+dla (zm x w [1, 2, 3, 4]) {
+	console.log(x);
+}
+
+zmienna i = 1;
+dopóki (i != 4) {
+	console.log(i++);
+}
+
+zmienna j = 1;
+rób {
+	console.log(j);
+} dopóki(j++ < 4)
