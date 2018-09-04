@@ -5,8 +5,10 @@ var File = require('vinyl');
 var gutil = require('gulp-util');
 var jspl = require('../src/index');
 var {spawn} = require('child_process');
+var path = require('path');
 
-var tester = function (jsplString, pureJsString, done) {
+// Function to test an embedded code.
+var internalTester = function (jsplString, pureJsString, done) {
     var fakeFile = new File({
         contents: new Buffer(jsplString),
         path: '-path-of-fake-file.jspl'
@@ -22,40 +24,48 @@ var tester = function (jsplString, pureJsString, done) {
 	});
 };
 
+// Function to test an external code.
+function externalTester(expectedFileName, producedFileName, done) {
+	var filesContent = {};
+	var expectedFile = fs.readFile(expectedFileName, 'utf8', compare.bind({which: 'expected'}));
+	var producedFile = fs.readFile(producedFileName, 'utf8', compare.bind({which: 'produced'}));
+
+	function compare(err, data) {
+		if (err) throw err;
+		filesContent[this.which] = data.trim();
+
+		let expectedContent, producedContent;
+		if ((expectedContent = filesContent.expected) && (producedContent = filesContent.produced)) {
+			expectedContent.should.be.equal(producedContent);
+			done();
+		}
+	}
+}
+
 after(function () {
 	console.log('\t TESTS GOT FINISHED');
 });
 
-describe('-- NESTED SNIPPETS', function () {
-	/**
-	 * Make sure vocab being a part of a word (instead of standalone statement) remains untouched.
-	 * For example, sno-w-ball should not be turned into sno-in-ball.
-	 *
-	 * Make sure latina letter will not be taken in place of Polish one.
-	 * For example, stala should not be turned into const since its Polish equivalent is stała.
-	 *
-	 * Make sure a statement will be matched no matter of case.
-	 * For example, Funkcja should be turned into function as well as funkcja or FunKcja.
-	 */
+describe('# INTERNAL CODE', function () {
 	describe('Proper statement replacing', function () {
 		it('should turn `nietoperz` into `nietoperz`', function (done) {
-			tester('nietoperz', 'nietoperz', done);
+			internalTester('nietoperz', 'nietoperz', done);
 		});
 
 		it('should turn `nie-toper(z)` into `false-toper(with)`', function (done) {
-			tester('nie-toper(z)', 'false-toper(with)', done);
+			internalTester('nie-toper(z)', 'false-toper(with)', done);
 		});
 
 		it('should turn `stała E = 2.7183;` into `const E = 2.7183;`', function (done) {
-			tester('stała E = 2.7183;', 'const E = 2.7183;', done);
+			internalTester('stała E = 2.7183;', 'const E = 2.7183;', done);
 		});
 
 		it('should turn `stala E = 2.7183;` into `stala E = 2.7183;`', function (done) {
-			tester('stala E = 2.7183;', 'stala E = 2.7183;', done);
+			internalTester('stala E = 2.7183;', 'stala E = 2.7183;', done);
 		});
 
 		it('should turn `ZM f = Funkcja () {};` into `var f = function () {};`', function (done) {
-			tester('ZM f = Funkcja () {};', 'var f = function () {};', done);
+			internalTester('ZM f = Funkcja () {};', 'var f = function () {};', done);
 		});
 	});
 
@@ -91,16 +101,14 @@ describe('-- NESTED SNIPPETS', function () {
 			(function (assertionItem) {
 				var assertionDescription = 'should turn ' + assertionItem.passed + ' into ' + assertionItem.expected;
 				it(assertionDescription, function (done) {
-					tester(assertionItem.passed, assertionItem.expected, done);
+					internalTester(assertionItem.passed, assertionItem.expected, done);
 				});
 			})(assertion);
 		});
 	});
 });
 
-
-
-describe('-- SOURCE FILES', function () {
+describe('# EXTERNAL CODE', function () {
 	before(function (done) {
 		var child = spawn('gulp', ['jspl'], { stdio: 'inherit', shell: true , cwd: 'test/'});
 		child.on('close', () => done());
@@ -111,18 +119,24 @@ describe('-- SOURCE FILES', function () {
 		child.on('close', () => done());
 	});
 
-	it('should transpile jspl to js #1', function () {
-		var expectedJs = fs.readFileSync('test/expected-js/vars.js', 'utf8').trim();
-		var producedJs = fs.readFileSync('test/produced-js/vars.js', 'utf8').trim();
+	var assertions = [
+		{
+			expectedFileName: 'test/expected-js/vars.js',
+			producedFileName: 'test/produced-js/vars.js',
+		},
+		{
+			expectedFileName: 'test/expected-js/gen.js',
+			producedFileName: 'test/produced-js/gen.js',
+		}
+	];
 
-		producedJs.should.be.equal(expectedJs);
-	});
-
-	it('should transpile jspl to js #2', function () {
-		var expectedJs = fs.readFileSync('test/expected-js/gen.js', 'utf8').trim();
-		var producedJs = fs.readFileSync('test/produced-js/gen.js', 'utf8').trim();
-
-		producedJs.should.be.equal(expectedJs);
+	assertions.forEach(function (assertion) {
+		(function (assertionItem) {
+			var assertionDescription = 'should transpile ' + path.basename(assertionItem.expectedFileName) + ' file';
+			it(assertionDescription, function (done) {
+				externalTester(assertionItem.expectedFileName, assertionItem.producedFileName, done);
+			});
+		})(assertion);
 	});
 });
 
