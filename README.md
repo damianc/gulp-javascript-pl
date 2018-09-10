@@ -1,12 +1,11 @@
 # gulp-javascript-pl
 
-Wtyczka do Gulpa pozwalająca pisać kod JavaScript po polsku.
-Tłumaczy kod JavaScript PL na czysty kod JavaScript, przekładając słowa zapisane w języku polskim na słowa zapisane w języku JavaScript.
+That's a Gulp plugin whereby you can write JavaScript code in Polish.Transpiles a code written in JavaScript PL into code written in pure JavaScript, having replaced Polish keywords with JavaScript ones.
 
-## Skrypty JavaScript PL
+## JavaScript PL scripts
 
-Należy pamiętać, że pisząc polski kod JavaScript cały czas piszemy jednak w JS a jedyną modyfikacją jest zapis słów kluczowych.
-Przykładowy kod został zaprezentowany poniżej. Pliki z polskim kodem JavaScript posiadają rozszerzenie `.jspl`.
+Keep in mind that when writing Polish code, the code still remains JavaScript code. Only difference is what keywords are in use.
+An example code is shown below. Files containing Polish JavaScript code have extension `.jspl`.
 
 ```
 zm fibbonaci = generator () {
@@ -23,7 +22,7 @@ zm f = fibonacci();
 console.log(f.next().value);
 ```
 
-Powyższe zostanie przetłumaczone na postać taką jak poniżej.
+The code above is to be transpiled to the form like below.
 
 ```
 var fibbonaci = function* () {
@@ -37,35 +36,14 @@ var fibbonaci = function* () {
 }
 ```
 
-## Zmienne i stałe
+## Built-in dictionary
 
-```
-zm a = 1,
-   b = 2;
+By default, the plugin provides a set of built-in keywords in Polish language.
+All ones are listed in the attached table below.
 
-stała C = 3;
-```
-
-## Funkcje i instrukcje warunkowe
-
-```
-funkcja liczba(x) {
-	jeśli (x > 9) zwróć tak;
-	inaczej zwróć nie;
-}
-```
-
-## Instrukcja `switch`
-
-```
-przełącz (x) {
-	gdy 1:
-	    console.log('Jeden');
-	    wyjdź;
-	gdy 2:
-	    console.log('Dwa');
-	    wyjdź;
-	domyślnie:
-	    console.log('Inna liczba')
-}
-```
+| Input keyword (JavaScript PL) | Output keyword (JavaScript) |
+|-------------------------------|-----------------------------|
+| `zm`         | `var`      |
+| `zmienna`    | `var`      |
+| `zmienna_blokowa` | `let`   |
+| `stała`      | `const`   |
