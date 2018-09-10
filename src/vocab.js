@@ -1,104 +1,73 @@
-var vocab = {};
+var vocab = {
 
-/*
- Basic JS statements.
- */
-Object.assign(vocab, {
+    // variables
     'zm': 'var',
     'zmienna': 'var',
     'zmienna_blokowa': 'let',
     'stała': 'const',
-    'tak': 'true',
-    'nie': 'false',
-    'prawda': 'true',
-    'fałsz': 'false'
-});
 
-/**
- * Function thing statements.
- */
-Object.assign(vocab, {
+    // functions
     'funkcja': 'function',
     'zwróć': 'return',
     'argumenty': 'arguments',
-    'parametry': 'arguments'
-});
+    'parametry': 'arguments',
 
-/**
- * Generator thing statements.
- */
-Object.assign(vocab, {
-    'generator': 'function*',
-    'dostarcz': 'yield'
-});
+    // generators
+     'generator': 'function*',
+    'dostarcz': 'yield',
+    'deleguj': 'yield*',
 
-/**
- * Conditional thing statements.
- */
-Object.assign(vocab, {
+    // conditionals
     'jeśli': 'if',
     'jeżeli': 'if',
-    'inaczej': 'else'
-});
+    'inaczej': 'else',
+    'przełączaj': 'switch',
+    'gdy': 'case',
+    'domyślnie': 'default',
 
-/**
- * Loop thing statements.
- */
-Object.assign(vocab, {
+    // loops
     'przez': 'for',
     'dla': 'for',
     'w': 'in',
+    'z': 'of',
     'podczas': 'while',
     'dopóki': 'while',
     'rób': 'do',
-    'zrób': 'do',
-    'wykonaj': 'do',
     'wykonuj': 'do',
     'wyjdź': 'break',
-    'jedź': 'continue',
-    'kontynuuj': 'continue'
-});
+    'kontynuuj': 'continue',
 
-/**
- * Switching thing statements.
- */
-Object.assign(vocab, {
-    'przełącz': 'switch',
-    'gdy': 'case',
-    'domyślnie': 'default'
-});
-
-/**
- * Exception thing statements.
- */
-Object.assign(vocab, {
+    // exception handling
     'spróbuj': 'try',
     'złap': 'catch',
-    'obsłuż': 'catch',
     'ostatecznie': 'finally',
-    'finalnie': 'finally'
-});
+    'finalnie': 'finally',
+    'rzuć': 'throw',
+    'zgłoś': 'throw',
 
-/**
- * OOP thing statements.
- */
-Object.assign(vocab, {
+    // misc
+    'mając': 'with',
+
+    // values
+    'tak': 'true',
+    'nie': 'false',
+    'prawda': 'true',
+    'fałsz': 'false',
+    'nic': 'null',
+
+    // operators
+    'typ': 'typeof',
+
+    // classes
     'klasa': 'class',
     'interfejs': 'interface',
     'rozszerza': 'extends',
     'rzuca': 'throws',
-    'wyrzuca': 'throws',
     'nowy': 'new',
     'nowa': 'new',
     'nowe': 'new',
     'usuń': 'delete'
-});
 
-/**
- * Additional statements.
- */
-Object.assign(vocab, {
-    'z': 'with'
-});
+};
 
 module.exports = vocab;
