@@ -53,7 +53,7 @@ describe('# INTERNAL CODE', function () {
 				expected: 'nietoperz'
 			}, {
 				given: 'nie-toper(z)',
-				expected: 'false-toper(with)'
+				expected: 'false-toper(of)'
 			}, {
 				given: 'stała E = 2.7183;',
 				expected: 'const E = 2.7183;'

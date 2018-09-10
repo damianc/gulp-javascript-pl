@@ -4,7 +4,7 @@ jeśli (a > b) {
 	// not ok
 }
 
-przełącz (x) {
+przełączaj (x) {
 	gdy 1: 'ok, 1'; wyjdź;
 	gdy 2: 'ok, 2'; wyjdź;
 	domyślnie: 'neither 1 nor 2';
