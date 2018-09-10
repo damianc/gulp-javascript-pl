@@ -21,7 +21,7 @@ Object.assign(vocab, {
     'funkcja': 'function',
     'zwróć': 'return',
     'argumenty': 'arguments',
-    'parametry': 'argumenty'
+    'parametry': 'arguments'
 });
 
 /**
