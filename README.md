@@ -9,30 +9,27 @@ An example code is shown below. Files containing Polish JavaScript code have ext
 
 ```
 zm fibbonaci = generator () {
-    zm pre = 0,
-       cur = 1;
+    zm pre = 0;
+    zm cur = 1;
 
-	podczas (tak) {
+    dopóki (tak) {
         pre = [cur, cur += pre][0];
         dostarcz cur;
     }
 }
-
-zm f = fibonacci();
-console.log(f.next().value);
 ```
 
 The code above is to be transpiled to the form like below.
 
 ```
 var fibbonaci = function* () {
-	var pre = 0,
-	   cur = 1;
+    var pre = 0;
+    var cur = 1;
 
-	while (true) {
-		pre = [cur, cur += pre][0];
-		yield cur;
-	}
+    while (true) {
+        pre = [cur, cur += pre][0];
+        yield cur;
+    }
 }
 ```
 
