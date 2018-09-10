@@ -41,7 +41,7 @@ All ones are listed in the attached table below.
 
 | Input keyword (JavaScript PL) | Output keyword (JavaScript) |
 |-------------------------------|-----------------------------|
-| variables |
+| variables ||
 | `zm`         | `var`      |
 | `zmienna`    | `var`      |
 | `zmienna_blokowa` | `let`   |
