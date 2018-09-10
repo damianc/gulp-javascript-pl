@@ -1,6 +1,7 @@
 # gulp-javascript-pl
 
-That's a Gulp plugin whereby you can write JavaScript code in Polish.Transpiles a code written in JavaScript PL into code written in pure JavaScript, having replaced Polish keywords with JavaScript ones.
+That's a Gulp plugin whereby you can write JavaScript code in Polish.
+Transpiles a code written in JavaScript PL into code written in pure JavaScript, having replaced Polish keywords with JavaScript ones.
 
 ## JavaScript PL scripts
 
@@ -40,6 +41,7 @@ All ones are listed in the attached table below.
 
 | Input keyword (JavaScript PL) | Output keyword (JavaScript) |
 |-------------------------------|-----------------------------|
+| variables |
 | `zm`         | `var`      |
 | `zmienna`    | `var`      |
 | `zmienna_blokowa` | `let`   |
