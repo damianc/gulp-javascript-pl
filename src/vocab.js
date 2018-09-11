@@ -54,9 +54,13 @@ var vocab = {
     'prawda': 'true',
     'fałsz': 'false',
     'nic': 'null',
+    'nieskończoność': 'Infinity',
+    'nieliczba': 'NaN',
+    'nie_liczba': 'NaN',
 
     // operators
     'typ': 'typeof',
+    'instancja': 'instanceof',
 
     // classes
     'klasa': 'class',
@@ -66,7 +70,8 @@ var vocab = {
     'nowy': 'new',
     'nowa': 'new',
     'nowe': 'new',
-    'usuń': 'delete'
+    'usuń': 'delete',
+    'konstruktor': 'constructor'
 
 };
 

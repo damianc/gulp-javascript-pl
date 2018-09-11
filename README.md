@@ -80,10 +80,14 @@ All ones are listed in the attached table below.
 | `fałsz`    | `false` |
 | `nie`    | `false` |
 | `nic` | `null` |
+| `nieskończoność` | `Infinity` |
+| `nieliczba`, `nie_liczba` | `NaN` |
 | `typ` | `typeof` |
+| `instancja` | `instanceof` |
 | `klasa` | `class` |
 | `interfejs` | `interface` |
 | `rozszerza` | `extends` |
 | `rzuca` | `throws` |
 | `nowy`, `nowa`, `nowe` | `new` |
 | `usuń` | `delete` |
+| `konstruktor` | `constructor` |
