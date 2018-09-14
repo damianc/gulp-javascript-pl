@@ -52,9 +52,9 @@ module.exports = {
 
 ```
 gulp.task('jspl:fr', function () {
-    return gulp.src('given-french-jspl/*.jspl')
+    return gulp.src('french-jspl/*.jspl')
         .pipe(jspl('fr'))
-        .pipe(gulp.dest('produced-french-js'));
+        .pipe(gulp.dest('produced-js'));
 });
 ```
 
