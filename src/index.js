@@ -4,7 +4,7 @@ var vocab = require('./vocab');
 
 const PLUGIN_NAME = 'gulp-javascript-pl';
 
-var jspl = function () {
+var jspl = function (lang = 'pl') {
     var stream = through.obj(function (file, encoding, cb) {
         if (file.isNull()) {
             return cb(null, file);
