@@ -1,6 +1,6 @@
 var through = require('through2');
 var gutil = require('gulp-util');
-var vocab = require('./vocab');
+// var vocab = require('./vocab');
 
 const PLUGIN_NAME = 'gulp-javascript-pl';
 
@@ -16,6 +16,9 @@ var jspl = function (lang = 'pl') {
         }
 
         if (file.isBuffer()) {
+            let vocabPath = (lang == 'pl') ? './vocab' : `./lang/${lang}.js`;
+            let vocab = require(vocabPath);
+            
             let fileContent = file.contents.toString('utf8');
             let vocabList = Object.keys(vocab).join('|');
             let reKeywords = new RegExp('(?<!\\w)(' + vocabList + ')(?!\\w)(?=(?:[^"\\\\]*(?:\\\\.|"(?:[^"\\\\]*\\.)*[^"\\\\]*"))*[^"]*$)', 'gi');

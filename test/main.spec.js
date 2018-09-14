@@ -4,7 +4,13 @@ var es = require('event-stream');
 var File = require('vinyl');
 var gutil = require('gulp-util');
 var jspl = require('../src/index');
+
 var {spawn} = require('child_process');
+var spawnCommonOpts = {
+	stdio: 'inherit',
+	shell: true,
+	cwd: 'test/'
+};
 
 // Function to test an embedded code.
 function internalTester(jsplString, pureJsString, done) {
@@ -110,15 +116,9 @@ describe('# INTERNAL CODE', function () {
 	});
 });
 
-describe('# EXTERNAL CODE', function () {
-	var spawnCommonOpts = {
-		stdio: 'inherit',
-		shell: true,
-		cwd: 'test/'
-	};
-
+describe('# POLISH EXTERNAL CODE', function () {
 	before(function (done) {
-		var child = spawn('gulp', ['jspl'], spawnCommonOpts);
+		var child = spawn('gulp', ['jspl:pl'], spawnCommonOpts);
 		child.on('close', () => done());
 	});
 
@@ -127,12 +127,34 @@ describe('# EXTERNAL CODE', function () {
 		child.on('close', () => done());
 	});
 
-	var externalFiles = fs.readdirSync('test/expected-js');
+	var externalFiles = fs.readdirSync('test/expected-polish-js');
 	externalFiles.forEach(function (externalFile) {
 		(function (file) {
 			var assertionDescription = `should transpile ${file} file`;
 			it(assertionDescription, function (done) {
-				externalTester(`test/expected-js/${file}`, `test/produced-js/${file}`, done);
+				externalTester(`test/expected-polish-js/${file}`, `test/produced-polish-js/${file}`, done);
+			});
+		})(externalFile);
+	});
+});
+
+describe('# FRENCH EXTERNAL CODE', function () {
+	before(function (done) {
+		var child = spawn('gulp', ['jspl:fr'], spawnCommonOpts);
+		child.on('close', () => done());
+	});
+
+	after(function (done) {
+		var child = spawn('gulp', ['clean'], spawnCommonOpts);
+		child.on('close', () => done());
+	});
+
+	var externalFiles = fs.readdirSync('test/expected-french-js');
+	externalFiles.forEach(function (externalFile) {
+		(function (file) {
+			var assertionDescription = `should transpile ${file} file`;
+			it(assertionDescription, function (done) {
+				externalTester(`test/expected-french-js/${file}`, `test/produced-french-js/${file}`, done);
 			});
 		})(externalFile);
 	});

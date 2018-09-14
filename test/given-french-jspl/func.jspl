@@ -1,0 +1,3 @@
+fonction sum(a, b) {
+	retour a + b;
+}
