@@ -34,6 +34,31 @@ var fibbonaci = function* () {
 }
 ```
 
+## Specifying a custom language
+
+By default, the plugin uses a standard built-in dictionary in which Polish keyword reside.
+You can add custom one. To do so, follow the below steps:
+
+* add an object with a vocabulary within the `lang` directory and name this file, for example `fr.js`
+
+```
+module.exports = {
+    'retour': 'return',
+    // ...
+};
+```
+
+* pass the filename (without the `.js` extension) to the `jspl()` call in gulpfile
+
+```
+gulp.task('jspl:fr', function () {
+    return gulp.src('given-french-jspl/*.jspl')
+        .pipe(jspl('fr'))
+        .pipe(gulp.dest('produced-french-js'));
+});
+```
+
+
 ## Built-in dictionary
 
 By default, the plugin provides a set of built-in keywords in Polish language.
