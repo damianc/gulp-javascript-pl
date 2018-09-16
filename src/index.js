@@ -26,7 +26,7 @@ var jspl = function (lang = 'pl') {
                 return vocab[keyword.toLowerCase()];
             });
 
-            file.contents = new Buffer(jsFileContent);
+            file.contents = Buffer.from(jsFileContent);
             file.path = gutil.replaceExtension(file.path, '.js');
         }
 
